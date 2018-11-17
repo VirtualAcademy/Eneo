@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+	<script src="../../static/js/moment.min.js"></script>
+	<script src="../../static/js/languageVars.js"></script>
+	<script src="../../static/js/Chart.bundle.js"></script>
+	<link rel="stylesheet" type="text/css" href="../../static/css/style.css" />
+	<style>
+    canvas {
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+    }
+	</style>
+</head>
+<body>
+<div align='center'>
+<table width="880" align="center">
+  <thead>
+  <tr>
+    <th colspan=3>
+	<div id="logo_text2" style="padding: 5px";>
+      <h1><a href="index.php">Eneo<span class="logo_colour"><script>document.write(UserLogin[0])</script></span></a></h1>
+	  <h5><script>document.write(SustainableInternetAccessSystem[0])</script></h5>
+    </div>
+    </th>
+  </tr>
+  </thead>
+
+<tr>
+	<td>
+
+<h2>{{currentmenu}}</h2>
+	<script>document.write(""
+		+"<table>"
+		+"<tr>"
+			+"<th><a href='#1'>Dashboard</a></th>"
+			+"<th><a href='#2'>Fuel Management</a></th>"
+			+"<th><a href='#3'>Fuel Monitor</a></th>"
+			+"<th><a href='#4'>Delivery Schedules</a></th>"
+			+"<th><a href='#5'>Report</a></th>"
+		+"</tr>");
+	</script>
+
+	</table>
+	<div style="width:100%;">
+		<canvas id="canvas"></canvas>
+	</div>
+	<br>
+	<br>
+        {% block content %}{% endblock %}
+	</td>
+</tr>
+	<tfoot>
+	<tr>
+	  <td colspan='3'>
+		<div align="center" style="padding: 5px";>
+			<a href='#' onclick=\"window.location = window.location.protocol \+ '\/\/' \+  window.location.hostname \+ '/index.php'\">Main Portal</a> |
+			<a href={% url 'monitor' %}>Monitor</a> |
+			<a href={% url 'manage' %}>Manage</a><br><br>
+			Copyright &copy; 2018 <br><br><a href='http://www.linkedin.com/in/choakumndi'>Cho Akum Ndi | Software Engineer</a>
+
+		</div>
+    </td>
+  </tr>
+  </tfoot>
+</table>
+</div>
+</body>
+</html>

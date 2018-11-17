@@ -659,18 +659,20 @@ class Product(models.Model):
         help_text=_("Product description."))
     supplier  = models.ForeignKey(
         Supplier, on_delete=models.CASCADE, verbose_name=_("Supplier"),
-        db_index=False, related_name='invoices',
+        db_index=False, related_name='order',
         help_text=_("The Distributor or manufacturer that supplied the item."))
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, verbose_name=_("Supplier"),
         db_index=False,
-        help_text=_("The Distributor or manufacturer that supplied the item."))
-#     unitsinstock
-#     unitsonorder
-#     pdtavailable
-#     reorderlevel
-#     currentorder
-#     note
+        help_text=_("The product item."))
+    units_instock = models.PositiveIntegerField()
+    units_onorder = models.PositiveIntegerField()
+    pdt_available = models.PositiveIntegerField()
+    reorder_level = models.PositiveIntegerField()
+    current_order = models.PositiveIntegerField()
+    note = models.TextField(
+        verbose_name=_("Description"), max_length=1000, null=True, blank=True,
+        help_text=_("Product description."))
 #
 # # class Category(models.Model):
 # #     catid
@@ -711,3 +713,8 @@ class Product(models.Model):
 #         help_text=_("The name of the company."))
 #     address
 
+# class PowerPlant(models.Model):
+#     ppid = models.PositiveIntegerField()
+#     ppname = models.CharField()
+#     pplocation = models.CharField()
+#     pdtncapacity = models.PositiveIntegerField()
