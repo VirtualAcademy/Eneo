@@ -1,5 +1,5 @@
-{% load static %}
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -8,7 +8,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="One Page Corporate HTML Template">
     <meta name="author" content="">
-    <link rel="icon" href="../media/images/logo-icon.png">
+    <link rel="icon" href="{% static 'images/logo-icon.png' %}">
 
     <!-- Title -->
     <title>ENEO - FMMS</title>
@@ -44,7 +44,7 @@
              <div class="col-lg-9 col-md-9" id="menu">
                <div class="menu">
                   <ul>
-                    <li><a href="#header">Home</a></li>
+                    <li><a href="{% url 'index' %}">Home</a></li>
                   </ul>
                </div>
              </div>

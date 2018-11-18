@@ -12,13 +12,19 @@ def home(request):
     return render(request,'index.html')
 
 
+def userdashboard(request, username):
+    return render(request, 'fuel/dashboard.html')
+
+
 def profile(request):
      if request.user.is_authenticated:
          user_groups = request.user.groups.values_list('name', flat=True)
          if request.user.is_superuser:
              return redirect("/admin")
          else:
-             return redirect("/dashboard/{}".format(user_groups[0]))
+             url = reverse('userdashboard', kwargs={'username': request.user})
+             return HttpResponseRedirect(url)
+             # return HttpResponseRedirect("/dashboard/{}".format(request.user))
 
 
 class FuelDetailsView(DetailView):

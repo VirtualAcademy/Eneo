@@ -129,4 +129,4 @@ MEDIA_URL = '/media/'
 
  # Redirect to home URL after login (Default redirects to /accounts/profile/)
 LOGIN_REDIRECT_URL = '/dashboard/'
-LOGOUT_REDIRECT_URL = '/account/login/'
+LOGOUT_REDIRECT_URL = '/accounts/login/'
