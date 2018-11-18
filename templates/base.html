@@ -1,0 +1,289 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="One Page Corporate HTML Template">
+    <meta name="author" content="">
+    <link rel="icon" href="../media/images/logo-icon.png">
+
+    <!-- Title -->
+    <title>ENEO - FMMS</title>
+
+    <!-- Necessary CSS Files -->
+    <!-- <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700" rel="stylesheet">	 	<!-- Google Font -->
+    <link href="{% static 'css/bootstrap/bootstrap.min.css' %}" rel="stylesheet">												<!-- bootstrap  -->
+    <link href="{% static 'css/startstyle.css' %}" rel="stylesheet">														<!-- Template Main css  -->
+    <link href="{% static 'css//jquery/jquery.bxslider.css' %}" rel="stylesheet" />											<!-- Client Logo Slider  -->
+    <!--<link rel="stylesheet" type="text/css" href="css/slick.css">										&lt;!&ndash; Testimonial Slider &ndash;&gt;-->
+    <!--<link rel="stylesheet" type="text/css" href="css/slick-theme.css">									&lt;!&ndash; Testimonial Slider &ndash;&gt;-->
+    <!--<link rel="stylesheet" type="text/css" href="css/jquery.fancybox.css" media="screen" />				&lt;!&ndash; Video Popup &ndash;&gt;-->
+    <!--<link rel="stylesheet" href="css/animate.css">														&lt;!&ndash; Wow Animation CSS &ndash;&gt;-->
+
+	<!--RESPONSIVE TAB -->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/easy-responsive-tabs.css' %} " />
+
+  </head>
+  <body>
+  <div class="se-pre-con"></div>
+  <!-- header -->
+    <div class="header" id="header">
+       <div class="container">
+          <div class="row header-top" data-spy="affix" data-offset-top="70">
+          <div class="container">
+				<div class="row">
+             <div class="col-lg-3 col-md-3">
+               <div class="logo"><a href="#"><img src="{% static 'images/eneologo1.png' %}" alt="logo"></a></div>
+                 <div id="menu-icon"><span></span><span></span><span></span></div>
+                 <div class="clear"></div>
+
+             </div>
+             <div class="col-lg-9 col-md-9" id="menu">
+               <div class="menu">
+                  <ul>
+                    <li><a href="#header">Home</a></li>
+                  </ul>
+               </div>
+             </div>
+             	</div>
+			</div>
+
+          </div>
+
+          <div class="row">
+             <div class="col-lg-12">
+                <h1 class="wow fadeInDown">Fuel Monitoring and Management System<br>
+(FMMS)</h1>
+                <p class="wow fadeInDown">Lorem Ipsum is simply dummy text of the printing and typesetting indus orem Ipsum  </p>
+                {% block content %}
+                 <div class="bnts wow fadeInUp">
+                   <a href="#" class="btn2">Login</a>
+                </div>
+                 {% endblock %}
+             </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="toping wow fadeInUp">
+                <img class="img-responsive cenetr-block" src="{% static '/images/topimg.png' %}"  alt="hero-image">
+              </div>
+            </div>
+          </div>
+       </div>
+    </div>
+   <!-- header End-->
+
+ 	<!-- features -->
+     <div class="section2 dark-section dark-color-bg" id="features">
+       <div class="container">
+          <div class="row">
+          <div class="col-lg-12">
+             <div class="heading">
+                <span>features</span>
+                <h2>All Functionalities</h2>
+             </div>
+          </div>
+          </div>
+          <div class="row">
+          <div class="col-lg-4 col-md-4 col-sm-6 module">
+             <div class="f-box wow fadeInUp" data-wow-duration="1s">
+               <div class="f-img"><img src="{% static 'images/icon1.png' %}" alt="f1"></div>
+               <a href="#">Friendly Admin</a>
+               <p>Lorem Ipsum is simply dummy text the printing and typeseing industry Lorem Ipsum has been standard.</p>
+             </div>
+          </div>
+
+          <div class="col-lg-4 col-md-4 col-sm-6 module">
+             <div class="f-box wow fadeInUp" data-wow-duration="2s">
+               <div class="f-img"><img src="{% static 'images/icon2.png' %}" alt="f2"></div>
+               <a href="#">Well Documented</a>
+               <p>Lorem Ipsum is simply dummy text the printing and typeseing industry Lorem Ipsum has been standard.</p>
+             </div>
+          </div>
+
+          <div class="col-lg-4 col-md-4 col-sm-6 module">
+             <div class="f-box wow fadeInUp" data-wow-duration="3s">
+               <div class="f-img"><img src="{% static 'images/icon3.png' %}" alt="f3"></div>
+               <a href="#">Highly Customizable</a>
+               <p>Lorem Ipsum is simply dummy text the printing and typeseing industry Lorem Ipsum has been standard.</p>
+             </div>
+          </div>
+
+          <div class="col-lg-4 col-md-4 col-sm-6 module">
+             <div class="f-box wow fadeInUp" data-wow-duration="3s">
+               <div class="f-img"><img src="{% static 'images/icon4.png' %}" alt="f4"></div>
+               <a href="#">Free Download</a>
+               <p>Lorem Ipsum is simply dummy text the printing and typeseing industry Lorem Ipsum has been standard.</p>
+             </div>
+          </div>
+
+          <div class="col-lg-4 col-md-4 col-sm-6 module">
+             <div class="f-box wow fadeInUp" data-wow-duration="3s">
+               <div class="f-img"><img src="{% static 'images/icon5.png' %}" alt="f5"></div>
+               <a href="#">Responsive Design</a>
+               <p>Lorem Ipsum is simply dummy text the printing and typeseing industry Lorem Ipsum has been standard.</p>
+             </div>
+          </div>
+
+          <div class="col-lg-4 col-md-4 col-sm-6 module">
+             <div class="f-box wow fadeInUp" data-wow-duration="3s">
+               <div class="f-img"><img src="{% static 'images/icon6.png' %}" alt="f6"></div>
+               <a href="#">Secure</a>
+               <p>Lorem Ipsum is simply dummy text the printing and typeseing industry Lorem Ipsum has been standard.</p>
+             </div>
+          </div>
+
+
+          </div>
+       </div>
+       </div>
+	<!-- features End-->
+     <!-- footer-->
+
+       		<div class="last-footer">
+        	<div class="container">
+				<div class="row">
+			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            	<div class="footer-copy">
+		            <p>© Copyright 2016 ProSoft. Designed by <a href="https://graphicriver.net/user/kalanidhithemes" target="_blank"> Kalanidhi Themes </a></p>
+                </div>
+			</div>
+            	</div>
+			</div>
+		</div>
+    </div>
+
+
+     <!-- footer End-->
+
+	<script src="{% static 'js/jquery/jquery-1.9.1.min.js' %}"></script> 													<!-- For screen gallery tab -->
+    <script src="{% static 'js/jquery/jquery.min.js' %}"></script>														<!-- librery -->
+    <script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>														<!-- bootstrap -->
+    <script src="{% static 'js/jquery.bxslider.min.js' %}"></script>												<!-- For Logos Slider -->
+    <script src="js/slick.js" type="text/javascript" charset="utf-8"></script>						<!-- For Testimonial Slider -->
+	<script type="text/javascript" src="js/jquery.fancybox.pack.js"></script>						<!-- For Video Pop up -->
+    <script type="text/javascript" src="js/modernizr.custom.53451.js"></script>						<!-- For Screenshot Details -->
+    <script type="text/javascript" src="js/jquery.gallery.js"></script>								<!-- For Screenshot Details -->
+    <script src="js/easyResponsiveTabs.js"></script>												<!-- For screen gallery tab -->
+    <script src="js/wow.min.js"></script>															<!--Wow animation js -->
+
+    <script src="js/retina.js"></script>                      <!-- Retina js -->
+	<script src="js/retina.min.js"></script>                  <!-- Retina js -->
+
+    <script>
+	$(document).ready(function(){
+
+	//Screenshot in details slider ==============================================
+
+	$(function() {
+		$('#dg-container').gallery();
+		});
+
+
+	//Testimonials slider ==============================================
+
+	$(".center").slick({
+	dots: true,
+    infinite: true,
+    centerMode: true,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+	responsive: [
+	{
+    breakpoint:600,
+	settings: {
+    mobileFirst: true,
+	slidesToShow: 1,
+    }
+    }
+    ]
+    });
+
+	// Logo Slider ==============================================
+
+	$('.slider1').bxSlider({
+    slideWidth: 260,
+    minSlides: 2,
+    maxSlides: 4,
+    slideMargin: 10,
+	});
+
+
+  	//Responsive Menu ==============================================
+
+  	$("#menu-icon").click(function(){$("#menu").slideToggle("slow");});
+
+
+
+
+
+	// Number Count for Our strong numbers ==============================================
+
+	$('.count').each(function () {
+    	$(this).prop('Counter',0).animate({
+        Counter: $(this).text()
+    }, {
+        duration: 4000,
+        easing: 'swing',
+        step: function (now) {
+            $(this).text(Math.ceil(now));
+        }
+    	});
+	});
+
+
+	// Scroll to Section ==============================================
+
+    $('a[href^="#"]').on('click', function(event) {
+        var target = $(this.getAttribute('href'));
+        if( target.length ) {
+            event.preventDefault();
+            $('html, body').stop().animate({
+                scrollTop: target.offset().top
+            }, 1000);
+        }
+    });
+	});
+
+
+	// Animate loader off screen ==============================================
+
+	$(window).load(function() {
+
+		$(".se-pre-con").fadeOut("slow");;
+	});
+
+
+	// Wow animation ==============================================
+	new WOW().init();
+
+
+	// screen gallery tab ==============================================
+
+	$(document).ready(function() {
+        //Horizontal Tab
+        $('#parentHorizontalTab').easyResponsiveTabs({
+            type: 'default', //Types: default, vertical, accordion
+            width: 'auto', //auto or any width like 600px
+            fit: true, // 100% fit in a container
+            tabidentify: 'hor_1', // The tab groups identifier
+            activate: function(event) { // Callback function if tab is switched
+                var $tab = $(this);
+                var $info = $('#nested-tabInfo');
+                var $name = $('span', $info);
+                $name.text($tab.text());
+                $info.show();
+            }
+        });
+
+    });
+
+
+</script>
+
+</body>
+</html>
