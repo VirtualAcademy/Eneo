@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, render_to_response
 from django.views.generic import DetailView
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
@@ -8,12 +8,24 @@ from .models import *
 # Create your views here.
 
 
+def storage(request):
+    storage = Storageunit.objects.all()
+    variation = Stockvariation.objects.all()
+
+    template = 'fuel/storage.html'
+    kwvars = {
+        'svar': variation,
+    }
+    print(storage)
+    return render_to_response(template, context=kwvars)
+
 def home(request):
     return render(request,'index.html')
 
 
 def userdashboard(request, username):
-    return render(request, 'fuel/dashboard.html')
+    context = {'username':username}
+    return render(request, 'fuel/dashboard.html', context=context)
 
 
 def profile(request):
@@ -24,7 +36,6 @@ def profile(request):
          else:
              url = reverse('userdashboard', kwargs={'username': request.user})
              return HttpResponseRedirect(url)
-             # return HttpResponseRedirect("/dashboard/{}".format(request.user))
 
 
 class FuelDetailsView(DetailView):

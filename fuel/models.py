@@ -130,7 +130,7 @@ class Powerplant(models.Model):
         verbose_name=_("PowerPlant location"), max_length=1000,
         help_text=_("The location of the power plant concerned."))
     production_capacity = models.PositiveIntegerField()
-    available_power = models.PositiveIntegerField()
+    # available_power = models.PositiveIntegerField()
     category = models.CharField(
         verbose_name=_("Category"), max_length=256,
         help_text=_("The plant category: hydro or thermal"),choices=TYPES)
@@ -191,17 +191,14 @@ class Storageunit(models.Model):
     storage_name = models.CharField(
         verbose_name=_("Fuel Tank"), max_length=1000,
         help_text=_("The name of power plant storage unit .e.go LLP starage."))
+    # stockvariation = models.ForeignKey('Stockvariation', on_delete=models.CASCADE, verbose_name=_("Inventory Changes"),
+    #     help_text=_("The changes or variation in fuel stored in the reservoir location or power plant."))
     capacity = models.PositiveIntegerField()
     measurement = models.CharField(verbose_name=_("Measurement"), max_length=256,help_text=_("Units of measurement"))
     facility = models.ForeignKey(Powerplant, on_delete=models.CASCADE, verbose_name=_("Storage Facility"),
         help_text=_("The fuel reservoir location or power plant."))
     fuel = models.ForeignKey(Fuel, on_delete=models.CASCADE, verbose_name=_("Fuel"),
         help_text=_("The fuel product in the reservoir location or power plant."))
-    iniial_qty = models.PositiveIntegerField()
-    qty_added = models.PositiveIntegerField()
-    qty_removed = models.PositiveIntegerField()
-    qty_left = models.PositiveIntegerField()
-    minimum_qty = models.PositiveIntegerField()
 
 
     def __str__(self):
@@ -216,9 +213,30 @@ class Storageunit(models.Model):
 
 class Stockvariation(models.Model):
     # sv_id = models.IntegerField(unique=True, primary_key=True, auto_created=True)
-    record_date = models.DateTimeField(auto_now_add=True)
-    storage_unit = models.ForeignKey(Storageunit, on_delete=models.CASCADE, verbose_name=_("Storage"),
-        help_text=_("The fuel reservoir."))
+    record_date = models.DateTimeField()
+    storage_unit = models.ForeignKey(Storageunit, on_delete=models.CASCADE, verbose_name=_("Storage Facility"),
+        help_text=_("The record changes in inventory."))
+    iniial_qty = models.PositiveIntegerField(verbose_name=_("Initial Quantity"),
+        help_text=_("The quantity left of the inventory on previous day."), default=0)
+    qty_added = models.PositiveIntegerField(verbose_name=_("Quantity Supplied"),
+        help_text=_("The quantity added from supply."), default=0)
+    qty_removed = models.PositiveIntegerField(verbose_name=_("Quantity Consumed"),
+        help_text=_("The quantity to be consumed."), default=0)
+    qty_left = models.PositiveIntegerField(verbose_name=_("Quantity on Hand"),
+        help_text=_("The quantity left before consumption."), default=0)
+    minimum_qty = models.PositiveIntegerField(verbose_name=_("Threshold"),
+        help_text=_("The threshold quantity that can't be consumed."), default=0)
+
+
+
+    def __str__(self):
+        return "Recorded on {}".format(self.record_date)
+
+    class Meta:
+    #     # unique_together = ('product', 'parent', 'name',)
+    #     ordering = ('path',)
+        verbose_name = _("Inventory Variation")
+        verbose_name_plural = _("Inventory Varations")
 
     def addstock(self):
         #Storageunit.object.all()

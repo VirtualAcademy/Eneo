@@ -1,0 +1,139 @@
+@import "compass/css3";
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
+
+*, *:before, *:after {  box-sizing: border-box; }
+
+body{ background: #2980b9; font: 100%/1.618 'Lato', sans-serif; font-weight: 400; color: #444; text-rendering: optimizeLegibility;}
+
+#mobile{ width: 360px; min-height: 768px; background: #fff; border-width:100px 20px; border-color: #33322f; border-style: solid; border-radius: 30px; margin: 30px auto 0; }
+label{ display: block; padding: 12px 6px;
+  &:hover{
+    cursor: pointer;
+  }
+}
+
+.intro{
+  padding: 10px;
+}
+
+h1{
+  color: #9b9b9b; font-weight: 700; font-size: 2.5em;
+}
+h2{
+  color: #bbb; font-weight: 400; font-size: 1.5em; line-height: 1.5em;
+}
+
+.button{
+  background: #eb278d;
+  border-radius: 5px;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  display: block;
+  padding: 15px;
+  text-decoration: none;
+}
+
+.hidden{
+  display: none;
+  visibility: hidden;
+}
+
+table{
+  width: 100%;
+  text-align: center;
+  position: relative;
+  margin: 0 0 40px 0;
+
+  #plan tr:nth-child(odd){
+    background:#f6f5f5;
+  }
+
+  .current {
+    background: rgba(238,46,146,0.2) ;
+  }
+
+  tr{
+    position: relative;
+    width: 100%;
+
+    &.feat:nth-child(4n+3){
+      background:#f6f5f5
+    }
+
+    &.sub,
+    &.total{
+      font-weight: 700;
+      background: #dce2e3 !important;
+    }
+
+  }
+
+  .feat:hover{
+      cursor: pointer;
+  }
+  .desc {
+    display: none;
+    background: #e1e1e1;
+    td:first-child{
+      padding: 15px;
+      text-align: left;
+    }
+  }
+
+  th{
+    background: #eb278d;
+    width: 32%;
+    color: #fff;
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+
+    div{
+      height: 46px;
+      padding: 8px 0 0 0;
+    }
+
+    &:first-child{
+      width: 35%;
+      border-left: none;
+    }
+
+    &:hover{
+      cursor: pointer;
+    }
+
+    .icons{
+      top: 0px;
+      left: 4px;
+      position: relative;
+      color: rgba(255,255,255,0.6);
+    }
+
+    ul{
+      width: 100%;
+      background: #ce1576;
+      display: none;
+      li{
+        padding: 10px 0;
+        &:hover {
+          background: #eb278d;
+        }
+      }
+    }
+
+  }
+  td{
+    padding: 12px 6px;
+    font-size: 0.9em;
+    vertical-align: middle;
+    &:first-child{
+      text-align: right;
+    }
+    &.color{
+      background: rgba(150,150,150,0.1);
+    }
+  }
+
+}
+
+.icons { font-size: 1em; line-height: 1em;}

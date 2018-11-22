@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{itemname}}</title>											<!-- bootstrap  -->
+    <link href="{% static 'css/table.css' %}" rel="stylesheet">
+</head>
+<body>
+<table>
+    <tbody>
+    <tr>
+        <th>Record Date</th>
+        <th>Storage Name</th>
+        <th>Capacicity</th>
+        <th> Measurement</th>
+        <th>Facility</th>
+        <th>Fuel</th>
+        <th>Initial Quantity</th>
+        <th>Stock Increase</th>
+        <th>Stock Decrease</th>
+        <th>Stock on Hand</th>
+        <th>Minimum Stock</th>
+    </tr>
+    {% for s in svar %}
+  <tr>
+    <td>{{s.record_date}}</td>
+      <td>{{s.storage_unit.storage_name}}</td>
+      <td>{{s.storage_unit.capacity}} </td>
+      <td>{{s.storage_unit.measurement}}</td>
+      <td>{{s.storage_unit.facility}}</td>
+      <td>{{s.storage_unit.fuel}}</td>
+      <td>{{s.iniial_qty}}</td>
+      <td>{{s.qty_added}}</td>
+      <td>{{s.qty_removed}}</td>
+      <td>{{s.qty_left}}</td>
+      <td>{{s.minimum_qty}}</td>
+    </tr>
+   {% endfor %}
+    </tbody>
+</table>
+</body>
+</html>

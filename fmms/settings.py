@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # apps
     'fmonitor',
     'fuel',
+    'production',
 
 
 ]
