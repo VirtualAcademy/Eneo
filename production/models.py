@@ -18,9 +18,9 @@ class Generators(models.Model):
     group_number = models.PositiveIntegerField(
         verbose_name=_("Generator Number"),
         help_text=_("Number given to identify the generator"), default=1)
-    power_units = models.BigIntegerField(
+    power_units = models.CharField(
         verbose_name=_("Power Available"),
-        help_text=_("Amount of power that can be generated"), default=0)
+        help_text=_("Amount of power that can be generated"), blank=True, max_length=1000)
     location = models.CharField(verbose_name=_("Plant Location"), max_length=256,
                                 help_text=_("The power plant ocation of the generator"))
     date_recorded = models.DateField(default=datetime.today, blank=False)
@@ -39,9 +39,9 @@ class Generators(models.Model):
 class PowerAvailable(models.Model):
 
     power_plant = models.ForeignKey(Powerplant, on_delete=models.CASCADE, verbose_name=_("Power Plant"), help_text=_("The power plant making declaration"))
-    power_units = models.BigIntegerField(
+    power_units = models.CharField(
         verbose_name=_("Power Available"),
-        help_text=_("Amount of power that can be generated"), default=0)
+        help_text=_("Amount of power that can be generated"), blank=True, max_length=1000)
     location = models.CharField(verbose_name=_("Plant Location"), max_length=256,
                                 help_text=_("The power plant ocation of the generator"))
     date_recorded = models.DateField(default=datetime.today, blank=False)
@@ -60,9 +60,9 @@ class PowerAvailable(models.Model):
 
 class Demand(models.Model):
     power_consumer= models.CharField(verbose_name=_("Power Consumer"), max_length=256,help_text=_("The name of power consumer."))
-    power_units = models.BigIntegerField(
+    power_units = models.CharField(
         verbose_name=_("Power Available"),
-        help_text=_("Amount of power that can be generated"), default=0)
+        help_text=_("Amount of power that can be generated"), max_length=1000, blank=True)
     unit_measurement = models.CharField(verbose_name=_("Unit of measurement"), max_length=256,
                                         help_text=_("The unit of measurement in which power is quantified"))
     date_recorded = models.DateField(default=datetime.today, blank=False)
@@ -79,9 +79,9 @@ class Demand(models.Model):
 
 class Production(models.Model):
     power_plant = models.ForeignKey(Powerplant, on_delete=models.CASCADE, verbose_name=_("Power Plant"), help_text=_("The power plant making declaration"))
-    power_units = models.BigIntegerField(
+    power_units = models.CharField(
         verbose_name=_("Power Available"),
-        help_text=_("Amount of power that can be generated"), default=0)
+        help_text=_("Amount of power that can be generated"), max_length=1000, blank=True)
     location = models.CharField(verbose_name=_("Plant Location"), max_length=256,
                                 help_text=_("The power plant ocation of the generator"))
     date_recorded = models.DateField(default=datetime.today, blank=False)

@@ -1,17 +1,30 @@
 import datetime
-import os, re
+import os, re, sys, django
 import openpyxl
 import itertools
 import collections
 
+
+# print(os.path.dirname(os.path.abspath("__file__")))
+
+sys.path.append(os.path.dirname(os.path.abspath("__file__"))) #here is root folder(means parent).
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "fmms.settings")
+django.setup()
+#
+
+from fuel.models import Powerplant
+from production.models import Generators, PowerAvailable
+
 fpath = r"D:\Data\Eneo\dev\fmms\media\imports"
+
+
 class WorkBook(object):
 
     def __init__(self,filepath, filename):
         self.FILEPATH = filepath
         self.FILENAME = filename
         self.OPENWORKBOOK = self.readFile()
-        # self.SHEET = self.getsheets()
+        self.SHEETTITLES = self.getSheetsNames()
         # self.ordeddictionary = collections.OrderedDict
         self.NULLCELLVALUES = lambda row:map(lambda cell:cell.value,row) # maps a list of rows of list of cells in that row, in order to extract its values
         self.NONNULLCELLVALUES = lambda cell_values: itertools.filterfalse(lambda cell_value: cell_value is None, cell_values)
@@ -25,6 +38,10 @@ class WorkBook(object):
 
     def getSheetsNames(self):
         return self.OPENWORKBOOK.get_sheet_names()
+
+    def getPlan(self, opened_plansheet):
+        for index, time_column in enumerate(opened_plansheet['B6':'B173']):
+            print(index, time_column[0].value,*opened_plansheet['E%d'%(index)].value)
 
     # def sheetNametodate(self):
     #     self.listofdates = []
@@ -75,12 +92,34 @@ class WorkBook(object):
         #     print([i,r])
 
     def avalablePowerSheet(self, opened_powersheet):
+        """
+        Returns a dictionary with keys -->
+        ['location', 'category', 'plant_name', 'date',
+        'values:(Hours, Total Availe Power, Availe Power per generator)']
+        """
+
         # data = opened_powersheet[:4]
+        values = [list(self.NULLCELLVALUES(u)) for u in opened_powersheet.iter_rows(min_row=3, max_row=26)]
         date = opened_powersheet['A1'].value
-        centrale = opened_powersheet['A3'].value
+        plantname = opened_powersheet['B1'].value
+
+        categorymatch= re.match(r'.+(HFO|LFO|HYDR).+',opened_powersheet['B1'].value)
+        if not(categorymatch):
+            print('hasn not got a category')
+            category ='Others'
+        else:
+            category=categorymatch.group(1)
+            if not(category == 'HYDR'):
+                category = 'THERM'
+            else:
+                category = category
+        location = opened_powersheet.title
+        # centrale = opened_powersheet['A3'].value
+        # pname = Powerplant.objects.get(location='limbe')
         # max_col = len(list(data))
         # s = list(self.NULLCELLVALUES(data))
-        return date.ctime(),centrale.ctime()#,centrale, [list(self.NULLCELLVALUES(u)) for u in opened_powersheet.iter_rows(min_row=3, max_row=26)]
+        return collections.OrderedDict({'date':date, 'plant_name':plantname, 'category':category,'location':location,'values':values})
+        #,centrale, [list(self.NULLCELLVALUES(u)) for u in opened_powersheet.iter_rows(min_row=3, max_row=26)]
 
 
 
@@ -88,7 +127,8 @@ class WorkBook(object):
 
 
         # d = datetime.date(*[int(i) for i in self.sheetsname[0].split('-')[::-1]])
-b = WorkBook(fpath,'power.xlsx')
+b = WorkBook(fpath,'plan.xlsx')
+# print(b.SHEETTITLES)
 # for sheet in b.sheetsname:
 #     if not(re.match(r'\d+',sheet.split()[0])):
 #         continue
@@ -107,4 +147,56 @@ b = WorkBook(fpath,'power.xlsx')
 # print(b.rdsheetvalues('Suivi Conso HFO'))
 # print(b.openCollectFile())
 # print(list(b.makeZip()))
-print(b.avalablePowerSheet(b.getSheetByName('Limbe')))
+
+
+# for sheet in b.SHEETTITLES:
+#     data = b.avalablePowerSheet(b.getSheetByName(sheet))
+#     location = data['location']
+#     cat = data['category']
+#     name = data['plant_name']
+#     date = data['date']
+#     group_data = data['values']
+#     print('For {}'.format(sheet.capitalize()))
+#     # print(group_data)
+#     for group in group_data:
+#         ptime = group[0]
+#         total_power = group[1]
+#
+#         for grpnum, power in enumerate(group[2:]):
+#             try:
+#                 plant_gotten_or_created = Powerplant.objects.get_or_create(location=location,defaults={'plant_name': name,
+#                                                                                                        'production_capacity': 0,
+#                                                                                                        'category': cat})
+#
+#                 power_plant = plant_gotten_or_created[0]
+#
+#                 available_power = PowerAvailable(location=location, power_plant=power_plant, power_units= total_power,
+#                                                  date_recorded=date, time_recorded=ptime)
+#                 if not(power):
+#                     continue
+#
+#                 # if power == 'Réserve':
+#                 #     power = 0
+#                 generator = Generators(location=location, group_number=grpnum+1, power_units=power,
+#                                        date_recorded=date, time_recorded=ptime)
+#
+#             except:
+#
+#                 print('Not successful in creating {} data, an error occurred'.format(name))
+#                 raise
+#
+#             finally:
+#                 power_plant.save()
+#                 available_power.save()
+#                 generator.save()
+#                 print("Group {} and Power Available {} created at {} for {}".format(grpnum+1, total_power, ptime, name))
+#
+#     print('Done.')
+# g=b.avalablePowerSheet(b.getSheetByName('Limbe'))
+# print(g['location'])
+# print(g['category'])
+# print(g['plant_name'])
+# print(g['date'])
+# print(g['values'])
+
+b.getPlan(b.getSheetByName('Prévisions horaires'))

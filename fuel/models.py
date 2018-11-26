@@ -129,7 +129,9 @@ class Powerplant(models.Model):
     location = models.CharField(
         verbose_name=_("PowerPlant location"), max_length=1000,
         help_text=_("The location of the power plant concerned."))
-    production_capacity = models.PositiveIntegerField()
+    production_capacity = models.CharField(
+        verbose_name=_("Production Capacity"),max_length=1000,
+        help_text=_("The production capacity."), blank=True)
     # available_power = models.PositiveIntegerField()
     category = models.CharField(
         verbose_name=_("Category"), max_length=256,
@@ -193,7 +195,9 @@ class Storageunit(models.Model):
         help_text=_("The name of power plant storage unit .e.go LLP starage."))
     # stockvariation = models.ForeignKey('Stockvariation', on_delete=models.CASCADE, verbose_name=_("Inventory Changes"),
     #     help_text=_("The changes or variation in fuel stored in the reservoir location or power plant."))
-    capacity = models.PositiveIntegerField()
+    capacity = models.CharField(
+        verbose_name=_("Storage Unit"),max_length=1000,
+        help_text=_("The storage unit for fuel."), blank=True)
     measurement = models.CharField(verbose_name=_("Measurement"), max_length=256,help_text=_("Units of measurement"))
     facility = models.ForeignKey(Powerplant, on_delete=models.CASCADE, verbose_name=_("Storage Facility"),
         help_text=_("The fuel reservoir location or power plant."))
@@ -216,16 +220,16 @@ class Stockvariation(models.Model):
     record_date = models.DateTimeField()
     storage_unit = models.ForeignKey(Storageunit, on_delete=models.CASCADE, verbose_name=_("Storage Facility"),
         help_text=_("The record changes in inventory."))
-    iniial_qty = models.PositiveIntegerField(verbose_name=_("Initial Quantity"),
-        help_text=_("The quantity left of the inventory on previous day."), default=0)
-    qty_added = models.PositiveIntegerField(verbose_name=_("Quantity Supplied"),
-        help_text=_("The quantity added from supply."), default=0)
-    qty_removed = models.PositiveIntegerField(verbose_name=_("Quantity Consumed"),
-        help_text=_("The quantity to be consumed."), default=0)
-    qty_left = models.PositiveIntegerField(verbose_name=_("Quantity on Hand"),
-        help_text=_("The quantity left before consumption."), default=0)
-    minimum_qty = models.PositiveIntegerField(verbose_name=_("Threshold"),
-        help_text=_("The threshold quantity that can't be consumed."), default=0)
+    iniial_qty = models.CharField(verbose_name=_("Initial Quantity"),
+        help_text=_("The quantity left of the inventory on previous day."), max_length=1000, blank=True)
+    qty_added = models.CharField(verbose_name=_("Quantity Supplied"),
+        help_text=_("The quantity added from supply."), max_length=1000, blank=True)
+    qty_removed = models.CharField(verbose_name=_("Quantity Consumed"),
+        help_text=_("The quantity to be consumed."), max_length=1000, blank=True)
+    qty_left = models.CharField(verbose_name=_("Quantity on Hand"),
+        help_text=_("The quantity left before consumption."), max_length=1000, blank=True)
+    minimum_qty = models.CharField(verbose_name=_("Threshold"),
+        help_text=_("The threshold quantity that can't be consumed."), max_length=1000, blank=True)
 
 
 
@@ -247,7 +251,8 @@ class Consumption(models.Model):
         help_text=_("The fuel reservoir."))
     fuel = models.ForeignKey(Fuel, on_delete=models.CASCADE, verbose_name=_("Fuel Consumed"),
         help_text=_("The fuel removed from reservoir."))
-    quantity = models.PositiveIntegerField()
+    quantity = models.CharField(verbose_name=_("Quantity"),
+        help_text=_("The quantity that has been consumed."), max_length=1000, blank=True)
     measurement = models.CharField(verbose_name=_("Measurement"), max_length=256,help_text=_("Units of measurement"))
     date = models.DateTimeField()
 
@@ -277,7 +282,8 @@ class Supply(models.Model):
         help_text=_("The fuel supplied to reservoir."))
     destined_to = models.ForeignKey(Storageunit, on_delete=models.CASCADE, verbose_name=_("Fuel Receptacle"),
         help_text=_("The fuel storage unit."))
-    quantity = models.PositiveIntegerField()
+    quantity = models.CharField(verbose_name=_("Quantity Supplied"),
+        help_text=_("The Supplied quantity."), max_length=1000, blank=True)
     measurement = models.CharField(verbose_name=_("Measurement"), max_length=256,help_text=_("Units of measurement"))
     date = models.DateTimeField()
 
